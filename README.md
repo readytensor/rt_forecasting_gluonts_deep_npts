@@ -1,6 +1,6 @@
-# DeepAR Forecaster in GluonTS
+# DeepNPTS Forecaster in GluonTS
 
-DeepAR Forecaster for the Forecasting problem category as per Ready Tensor specifications.
+DeepNPTS Forecaster for the Forecasting problem category as per Ready Tensor specifications.
 
 ## Project Description
 
@@ -18,7 +18,7 @@ The following are the requirements for using your data with this model:
 
 Here are the highlights of this implementation: <br/>
 
-- A **DeepAR Forecaster** algorithm built using **GluonTS**
+- A **DeepNPTS Forecaster** algorithm built using **GluonTS**
   Additionally, the implementation contains the following features:
 - **Data Validation**: Pydantic data validation is used for the schema, training and test files, as well as the inference request data.
 - **Error handling and logging**: Python's logging module is used for logging and key functions include exception handling.
