@@ -7,5 +7,5 @@
   "batch_norm": true,
   "context_length": null,
   "epochs": 100,
-  "use_exogenous": true
+  "use_exogenous": false
 }
