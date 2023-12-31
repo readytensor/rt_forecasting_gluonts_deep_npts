@@ -3,7 +3,7 @@
   "lags_forecast_ratio": 3,
   "lr": 1e-3,
   "dropout_rate": 0.0,
-  "num_hidden_nodes": null,
+  "num_hidden_nodes": [20, 20],
   "batch_norm": true,
   "context_length": null,
   "epochs": 100,
