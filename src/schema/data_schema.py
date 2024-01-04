@@ -32,6 +32,7 @@ class ForecastingSchema:
         self.schema = schema_dict
         self._past_covariates = self._get_past_covariates()
         self._future_covariates = self._get_future_covariates()
+        self._static_covariates = self._get_static_covariates()
 
     @property
     def model_category(self) -> str:
@@ -164,6 +165,31 @@ class ForecastingSchema:
         return future_covariates
 
     @property
+    def static_covariates(self) -> List[str]:
+        """
+        Gets the static_covariates of the data.
+
+        Returns:
+            List[str]: The static covariates list.
+        """
+        return self._static_covariates
+
+    def _get_static_covariates(self) -> List[str]:
+        """
+        Returns the names of static covariates.
+
+        Returns:
+            List[str]: The list of static_covariates.
+        """
+        if "staticCovariates" not in self.schema:
+            return []
+        if len(self.schema["staticCovariates"]) == 0:
+            return []
+        fields = self.schema["staticCovariates"]
+        static_covariates = [f["name"] for f in fields if f["dataType"] == "NUMERIC"]
+        return static_covariates
+
+    @property
     def covariates(self) -> List[str]:
         """
         Gets the past and future covariates of the data.
@@ -171,7 +197,7 @@ class ForecastingSchema:
         Returns:
             List[str]: The covariates list.
         """
-        return self._past_covariates + self._future_covariates
+        return self._past_covariates + self._future_covariates + self._static_covariates
 
     @property
     def all_fields(self) -> List[str]:
@@ -186,6 +212,7 @@ class ForecastingSchema:
             [self.id_col, self.time_col, self.target]
             + self._past_covariates
             + self._future_covariates
+            + self._static_covariates
         )
 
     @property
@@ -308,7 +335,11 @@ class ForecastingSchema:
         Raises:
             ValueError: If the covariate is not found in the schema.
         """
-        covariates = self.schema["pastCovariates"] + self.schema["futureCovariates"]
+        covariates = (
+            self.schema["pastCovariates"]
+            + self.schema["futureCovariates"]
+            + self.schema["staticCovariates"]
+        )
         for covariate in covariates:
             if covariate["name"] == covariate_name:
                 return covariate

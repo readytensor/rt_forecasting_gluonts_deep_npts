@@ -2,10 +2,9 @@
   "history_forecast_ratio": 10,
   "lags_forecast_ratio": 3,
   "lr": 1e-3,
-  "dropout_rate": 0.0,
-  "num_hidden_nodes": [20, 20],
+  "dropout_rate": 0.1,
   "batch_norm": true,
   "context_length": null,
-  "epochs": 100,
-  "use_exogenous": false
+  "epochs": 1,
+  "use_exogenous": true
 }
