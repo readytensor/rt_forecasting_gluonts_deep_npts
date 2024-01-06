@@ -12,8 +12,6 @@ from gluonts.dataset.common import ListDataset
 from pytorch_lightning import seed_everything
 from lightning.pytorch.callbacks import EarlyStopping
 from sklearn.preprocessing import MinMaxScaler
-from gluonts.torch.model.deep_npts._network import DeepNPTSNetworkSmooth
-
 
 warnings.filterwarnings("ignore")
 
@@ -159,7 +157,6 @@ class Forecaster:
             batch_size=self.batch_size,
             freq=self.freq,
             num_feat_dynamic_real=num_feat_dynamic_real,
-            # network_type=DeepNPTSNetworkSmooth,
         )
 
     def prepare_time_column(
@@ -333,7 +330,7 @@ class Forecaster:
 
         cov_names = []
         if self.use_exogenous:
-            cov_names = data_schema.future_covariates
+            cov_names = data_schema.future_covariates + data_schema.static_covariates
 
         all_covariates = []
         for series in all_series:
